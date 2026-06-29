@@ -28,17 +28,14 @@
 import bpy
 
 
-def is_extension():
-    return __name__.startswith('bl_ext.')
-
-
 def get_registered_addon_name():
-    if is_extension():
-        path = __name__.split('.')
-        extension = path[0:3]
-        return '.'.join(extension)
-
     path = __name__.split('.')
+
+    # Extensions are registered under a 'bl_ext.<repo>.<id>' module path, whereas
+    # legacy add-ons (installed from a .zip) use a single top-level module name.
+    if __name__.startswith('bl_ext.'):
+        return '.'.join(path[0:3])
+
     return path[0]
 
 

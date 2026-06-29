@@ -95,11 +95,6 @@ class NDPreferences(AddonPreferences):
         default=False,
     )
 
-    update_available: BoolProperty(
-        name="Update Available",
-        default=False,
-    )
-
     enable_quick_favourites: BoolProperty(
         name="Enable Quick Favourites",
         default=False,
@@ -170,11 +165,6 @@ class NDPreferences(AddonPreferences):
 
     overlay_pinned: BoolProperty(
         name="Overlay Pinned",
-        default=False,
-    )
-
-    enable_update_check: BoolProperty(
-        name="Enable Update Check",
         default=False,
     )
 
@@ -498,7 +488,6 @@ class NDPreferences(AddonPreferences):
 
         general_boxed_prefs = [
             ["The default angle to use for bevel and smoothing operations", "default_smoothing_angle", True, True],
-            ["Automatically check if ND is up to date when Blender starts", "enable_update_check", False, not lib.addons.is_extension()],
             ["Utils toggle behaviour", "utils_toggle_behaviour", True, True],
             ["Enable experimental features (requires Blender restart)", "enable_experimental_features", False, True]]
 
@@ -651,14 +640,6 @@ def register():
     for registerable in registerables:
         registerable.reload()
         registerable.register()
-
-    version = (2, 1, 0)
-    prefs = lib.preferences.get_preferences()
-
-    if not lib.addons.is_extension() and prefs.enable_update_check:
-        prefs.update_available = lib.updates.update_available(version)
-    else:
-        prefs.update_available = False
 
 
 def unregister():

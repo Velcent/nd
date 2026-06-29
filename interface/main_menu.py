@@ -43,10 +43,6 @@ class ND_MT_main_menu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        if not lib.addons.is_extension() and lib.preferences.get_preferences().update_available:
-            layout.operator("wm.url_open", text="Update Available!", icon='PACKAGE').url = "https://hugemenace.gumroad.com/l/nd-blender-addon"
-            layout.separator()
-
         layout.operator_context = 'INVOKE_DEFAULT'
 
         render_ops(ops.standalone_ops, layout, new_row=False, use_separator=True)

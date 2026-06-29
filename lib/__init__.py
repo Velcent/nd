@@ -34,7 +34,6 @@ from . import axis
 from . import points
 from . import viewport
 from . import assets
-from . import updates
 from . import preferences
 from . import addons
 from . import collections
@@ -54,7 +53,6 @@ registerables = (
     points,
     viewport,
     assets,
-    updates,
     preferences,
     addons,
     collections,
