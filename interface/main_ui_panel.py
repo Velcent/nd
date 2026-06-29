@@ -30,20 +30,10 @@ import os
 import addon_utils
 from bpy.props import BoolProperty, PointerProperty
 from .. __init__ import bl_info
-from .. import lib
 from . import ops
-from . common import create_box, render_ops, web_link
+from . common import create_box, render_ops
 from .. lib.preferences import get_preferences
 from .. lib.polling import app_minor_version
-
-
-links = [
-    ("https://docs.nd.hugemenace.co", "Documentation", 'HOME'),
-    ("https://hugemenace.co/youtube", "YouTube Channel", 'VIEW_CAMERA'),
-    ("https://hugemenace.co/nd/feedback", "Feature Requests / Bugs", 'FILE_SCRIPT'),
-    ("https://hugemenace.co/discord", "Discord Server", 'SYNTAX_ON'),
-    ("https://hugemenace.co/patreon", "Support ND on Patreon", 'SOLO_ON'),
-]
 
 
 op_sections = [
@@ -68,7 +58,6 @@ icons = ops.build_icon_lookup_table()
 
 
 class MainUIPanelProps(bpy.types.PropertyGroup):
-    display_links: BoolProperty(default=False)
     standalone: BoolProperty(default=False)
     sketch: BoolProperty(default=False)
     booleans: BoolProperty(default=False)
@@ -97,7 +86,6 @@ class ND_OT_toggle_sections(bpy.types.Operator):
         for prop in list(props.keys()):
             toggle = not getattr(props, prop)
 
-        props.display_links = toggle
         props.standalone = toggle
         props.sketch = toggle
         props.booleans = toggle
@@ -211,27 +199,6 @@ class ND_PT_main_ui_panel(bpy.types.Panel):
         row = layout.column()
         row.operator("nd.toggle_sections")
         row.separator()
-
-        if not lib.addons.is_extension() and lib.preferences.get_preferences().update_available:
-            box = layout.box()
-            column = box.column()
-
-            row = column.row(align=True)
-            row.scale_y = 1.5
-            row.alert = True
-            web_link("https://hugemenace.gumroad.com/l/nd-blender-addon", "Update Available!", "PACKAGE", row)
-
-            row = column.row(align=True)
-            row.scale_y = 1.2
-            web_link("https://docs.nd.hugemenace.co/#/getting-started/changelog", "View Changelog", "DOCUMENTS", row)
-
-        if not lib.addons.is_extension():
-            box = create_box("Useful Links", layout, props, "display_links", icons, [])
-            if props.display_links:
-                for url, label, icon in links:
-                    row = box.row(align=True)
-                    row.scale_y = 1.2
-                    web_link(url, label, icon, row)
 
         for label, collection, prop, shortcuts in op_sections:
             box = create_box(label, layout, props, prop, icons, shortcuts)

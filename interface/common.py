@@ -74,10 +74,3 @@ def render_ops(ops, layout, new_row=True, use_separator=False):
             row.operator(op, icon=icon, text=label).mode = mode
         else:
             row.operator(op, icon=icon, text=label)
-
-
-def web_link(url, text, icon, layout):
-    if icon:
-        layout.operator("wm.url_open", text=text, icon=icon).url = url
-    else:
-        layout.operator("wm.url_open", text=text).url = url
