@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/hugemenace/nd/compare/v2.1.0...v2.2.0) (2026-06-30)
+
+
+### Features
+
+* add adjust bevel resolution operator ([14030d9](https://github.com/hugemenace/nd/commit/14030d960f654374326bb18371274f25fb6d8a1e))
+
+
+### Bug Fixes
+
+* fix the custom and all overlays toggle (Blender 5) ([a7fbc45](https://github.com/hugemenace/nd/commit/a7fbc45b88b68b1b5d2b15e4d2d273e86b04d1f5))
+* preserve empties used by constraints in clean utils ([b645e8b](https://github.com/hugemenace/nd/commit/b645e8b52d62af5172b1bd7c89ca321a3d09b39d))
+
 ## [2.1.0](https://github.com/hugemenace/nd/compare/v2.0.0...v2.1.0) (2025-10-20)
 
 
